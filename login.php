@@ -29,7 +29,7 @@
 			$_SESSION['adminlevel'] = $adminlevel;
 			$_SESSION['eventadmin'] = $eventadmin;
 			$_SESSION['is_society'] = $is_society;
-			echo '<META HTTP-EQUIV="Refresh" Content="2; URL=tests/test_login.php">';
+			echo '<META HTTP-EQUIV="Refresh" Content="2; URL=index.php">';
 		}
 		else{
 			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=registration.php#error1">';

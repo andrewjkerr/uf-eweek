@@ -51,7 +51,7 @@
 			$_SESSION['eventadmin'] = $eventadmin;
 			$_SESSION['is_society'] = 0;
 			echo '<p>Login successful!</p>';
-			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=tests/test_login.php">';
+			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=index.php">';
 		}
 	?>
 </body>

@@ -95,13 +95,67 @@
 		
 		<!-- Login form -->
 		<div id = "login">
-			<form method="post" action="login.php">
-				<p>Email: <input type="text" name="email" style="width: 100%"/></p>
-				<p>Password: <input type="password" id="password" style="width: 100%" onkeyup="hashpass();"/></p>
-				<p><input type="hidden" id="hashed_pass" name="hashed_pass" /></p>
-				<p><input type="submit" id="my_submit" /></p>
-				<p><em><a href="registration.php#register">Don't have an account? Register!</a></em></p>
-			</form>
+			<?php
+				if (!isset($_SESSION['uid'])){
+		    		echo '<form method="post" action="login.php">
+							<p>Email: <input type="text" name="email" style="width: 100%"/></p>
+							<p>Password: <input type="password" id="password" style="width: 100%" onkeyup="hashpass();"/></p>
+							<p><input type="hidden" id="hashed_pass" name="hashed_pass" /></p>
+							<p><input type="submit" id="my_submit" /></p>
+							<p><em><a href="registration.php#register">Don\'t have an account? Register!</a></em></p>
+						</form>';
+				}
+				else{
+					echo 'Hello, ' . $_SESSION['name'] . '!';
+					echo '<ul>';
+					switch($_SESSION['adminlevel']){
+						case 0:
+							echo '<li>You are a proud engineer!</li>';
+							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
+							echo '<li><a href="logout.php">Logout</a></li>';
+							break;
+						case 1:
+							echo '<li>You are an event admin</li>';
+							if($_SESSION['eventadmin'] != '0'){
+								echo '<li><a href="manageEvent.php?' . $_SESSION['eventadmin'] . '">Manage ' . $_SESSION['eventadmin'] . '</a></li>';
+								echo '<li><a href="events.php">View and RSVP for events!</a></li>';
+								echo '<li><a href="logout.php">Logout</a></li>';
+							}
+							break;
+						case 2:
+							echo '<li>You are advertising director</li>';
+							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
+							echo '<li><a href="logout.php">Logout</a></li>';
+							break;
+						case 3:
+							echo '<li>You are attendant</li>';
+							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
+							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
+							echo '<li><a href="logout.php">Logout</a></li>';
+							break;
+						case 4:
+							echo '<li>You are director of eweek</li>';
+							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
+							echo '<li><a href="manageEvent.php?id=all">Manage events</a></li>';
+							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
+							echo '<li><a href="logout.php">Logout</a></li>';
+							break;
+						case 5:
+							echo '<li>You are super admin!</li>';
+							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
+							echo '<li><a href="manageEvent.php?id=all">Manage events</a></li>';
+							echo '<li><a href="manageUsers.php">Manage users</a></li>';
+							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
+							echo '<li><a href="logout.php">Logout</a></li>';
+							break;
+					}
+					echo '</ul>';
+				}
+			?>
 		</div>
 		
 		<!-- Display tweets! -->
