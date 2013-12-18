@@ -1,0 +1,52 @@
+body{
+	background-color: #eee;
+	background-image: url(http://ufbec.org/eweek/forscience/images/gatorbg.png);
+	background-repeat: repeat-x;
+}
+
+header{
+	display: block;
+	margin: 0 auto;
+	padding: 25px 0;
+	width: 1000px;
+	background-color: #990000;
+	background-image: url("http://ufbec.org/eweek/forscience/images/eweek-2013-header-trans.png");
+	background-repeat: no-repeat;
+	background-position: center center;
+	height: 216px;
+}
+
+nav{
+	margin: 0 auto;
+	width: 1000px;
+	padding: 15px 0px;
+	text-align: center;
+	background-color: #000;
+	color: #fff;
+	font-size: 18px;
+}
+
+nav	a{
+	color: #fff;
+	text-decoration: none;
+}
+
+#container{
+	margin: 0 auto;
+	width: 1000px;
+	padding-top:15px;
+	/* Ideally the height of the container is actually contained within the actual page. */
+	height: 400px;
+	background-color: #fff;
+}
+
+footer{
+	bottom: 0px;
+	padding: 15px 0;
+	text-align: center;
+	background-color: #990000;
+	color: #fff;
+	width: 1000px;
+	margin: 0 auto;
+	border-top: 3px solid black;
+}

@@ -7,7 +7,11 @@
 ?>
 <html>
 <head>
-	<title>Login</title>
+	<title>UF E-Week</title>
+	
+	<!-------------
+		SCRIPTS
+	-------------->
 	<!-- https://code.google.com/p/crypto-js/#SHA-3 -->
 	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
 	<script>
@@ -17,114 +21,24 @@
 		document.getElementById('hashed_pass').value = hashed;
 	}
 	</script>
+	
+	<!-------------
+		STYLE
+	-------------->
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<style>
-		body{
-			background-color: #eee;
-			background-image: url(http://ufbec.org/eweek/forscience/images/gatorbg.png);
-			background-repeat: repeat-x;
-		}
-		
-		header{
-			display: block;
-			margin: 0 auto;
-			padding: 25px 0;
-			width: 1000px;
-			background-color: #990000;
-			background-image: url("http://ufbec.org/eweek/forscience/images/eweek-2013-header-trans.png");
-			background-repeat: no-repeat;
-			background-position: center center;
-			height: 216px;
-		}
-		
-		nav{
-			margin: 0 auto;
-			width: 1000px;
-			padding: 15px 0px;
-			text-align: center;
-			background-color: #000;
-			color: #fff;
-			font-size: 18px;
-		}
-		
-		nav	a{
-			color: #fff;
-			text-decoration: none;
-		}
-		
 		#container{
-			margin: 0 auto;
-			width: 1000px;
-			padding-top:15px;
 			height: 825px;
-			background-color: #fff;
-		}
-		
-		#content{
-			float: left;
-			padding: 0 15px;
-			width: 465px;
-		}
-		
-		#tweets{
-			float: right;
-			width: 235px;
-			padding-top: 15px;
-		}
-		
-		#login{
-			float: right;
-			width: 200px;
-			padding: 15px;
-			-webkit-border-top-right-radius: 50px 30px; 
-			-webkit-border-bottom-left-radius: 50px 30px;
-			border: 3px solid #777;
-		}
-		
-		#cal{
-			float: right;
-			right: 0;
-			margin: 0 15px;
-			padding: 15px;
-			width: 200px;
-			height: 785px;
-			-webkit-border-top-right-radius: 50px 30px; 
-			-webkit-border-bottom-left-radius: 50px 30px;
-			border: 3px solid #777;
-		}
-		
-		.event{
-			
-		}
-		
-		.event-name{
-		
-		}
-		
-		.event-date{
-		
-		}
-		
-		.event-location{
-			
-		}
-		
-		footer{
-			bottom: 0px;
-			padding: 15px 0;
-			text-align: center;
-			background-color: #990000;
-			color: #fff;
-			width: 1000px;
-			margin: 0 auto;
-			border-top: 3px solid black;
 		}
 	</style>
+	
 </head>
 <body>
-	<header></header>
-	<nav>
-		<a href="index.php">Home</a> | <a href="test_events.php">Events Test</a>
-	</nav>
+	<?php
+		include("template/header.php");
+		include("template/nav.php");
+	?>
 	<div id = "container">
 		<div id = "content">
 			<h1>Hello, World!</h1>
@@ -175,8 +89,8 @@
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 	</div>
-	<footer>
-		<p>Copyright 2013 Andrew Kerr | andrewjkerr47@gmail.com</p>
-	</footer>
+	<?php
+		include("template/footer.php");
+	?>
 </body>
 </html>

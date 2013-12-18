@@ -1,0 +1,48 @@
+#content{
+	float: left;
+	padding: 0 15px;
+	width: 465px;
+}
+
+#tweets{
+	float: right;
+	width: 235px;
+	padding-top: 15px;
+}
+
+#login{
+	float: right;
+	width: 200px;
+	padding: 15px;
+	-webkit-border-top-right-radius: 50px 30px; 
+	-webkit-border-bottom-left-radius: 50px 30px;
+	border: 3px solid #777;
+}
+
+#cal{
+	float: right;
+	right: 0;
+	margin: 0 15px;
+	padding: 15px;
+	width: 200px;
+	height: 785px;
+	-webkit-border-top-right-radius: 50px 30px; 
+	-webkit-border-bottom-left-radius: 50px 30px;
+	border: 3px solid #777;
+}
+
+.event{
+	
+}
+
+.event-name{
+
+}
+
+.event-date{
+
+}
+
+.event-location{
+	
+}
