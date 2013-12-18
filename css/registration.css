@@ -1,0 +1,23 @@
+table{
+	height: 300px;	
+}
+
+#left-side{
+	padding-left: 30px;
+	width: 465px;
+	border-right: 5px solid black;
+}
+
+#login-form{
+	
+}
+
+#registration-form{
+	
+}
+
+#right-side{
+	padding-top: 7px;
+	padding-left: 25px;
+	vertical-align: top;
+}

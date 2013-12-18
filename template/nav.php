@@ -6,5 +6,5 @@
 	*/
 ?>
 <nav>
-	<a href="index.php">Home</a> | <a href="test_events.php">Events Test</a>
+	<a href="index.php">Home</a> | <a href="register.php">Login</a>
 </nav>

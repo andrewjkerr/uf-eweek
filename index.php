@@ -35,11 +35,19 @@
 	
 </head>
 <body>
+	<!-------------
+		HEADER/NAV
+	-------------->
 	<?php
 		include("template/header.php");
 		include("template/nav.php");
 	?>
+	
+	<!-------------
+		CONTAINER
+	-------------->
 	<div id = "container">
+		<!-- Homepage welcome/announcements -->
 		<div id = "content">
 			<h1>Hello, World!</h1>
 			<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam odio est, imperdiet ac bibendum at, ultricies vel erat. Donec consectetur neque id lorem ullamcorper, posuere facilisis lorem aliquet. Ut sem leo, eleifend in eros vitae, interdum lacinia augue. Nunc lacus eros, aliquet ac aliquam mollis, euismod id leo. Ut a lacus vel lorem auctor mattis. Donec mollis fermentum libero, ut ultricies lorem vehicula a. Integer nulla quam, scelerisque vitae tristique eu, ornare quis lacus. Nunc tristique rutrum quam ac elementum. Etiam hendrerit dapibus quam sed gravida. Nulla tincidunt sollicitudin dui, sit amet suscipit justo.</p>
@@ -62,6 +70,8 @@
 				?>
 			</div>
 		</div>
+		
+		<!-- Event calendar -->
 		<div id = "cal">
 			<h2>Schedule of Events</h2>
 			<?php
@@ -76,6 +86,8 @@
 				}
 			?>
 		</div>
+		
+		<!-- Login form -->
 		<div id = "login">
 			<form method="post" action="login.php">
 				<p>Email: <input type="text" name="email" style="width: 100%"/></p>
@@ -84,11 +96,17 @@
 				<p><input type="submit" id="my_submit" /></p>
 			</form>
 		</div>
+		
+		<!-- Display tweets! -->
 		<div id = "tweets">
 			<a class="twitter-timeline" data-dnt="true" href="https://twitter.com/andrewuf" data-widget-id="413242474895667200">Tweets by @andrewuf (Turn Disconnect off you dummy!)</a>
 			<script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+"://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
 		</div>
 	</div>
+	
+	<!-------------
+		FOOTER
+	-------------->
 	<?php
 		include("template/footer.php");
 	?>
