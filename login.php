@@ -1,4 +1,9 @@
 <?php
+	/*
+		AUTHOR: andrewjkerr <andrewjkerr47@gmail.com>
+		DESCRIPTION: Processes logins.
+		USAGE: Use as a form action!
+	*/
 	include('mysql_connect.php');
 ?>
 <html>

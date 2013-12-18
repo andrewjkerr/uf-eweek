@@ -1,3 +1,10 @@
+<?php
+	/*
+		AUTHOR: andrewjkerr <andrewjkerr47@gmail.com>
+		DESCRIPTION: Homepage!
+		USAGE: Just load it up :)
+	*/
+?>
 <html>
 <head>
 	<title>Login</title>

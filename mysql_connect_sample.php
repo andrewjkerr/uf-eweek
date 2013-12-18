@@ -1,4 +1,9 @@
 <?php
+	/*
+		AUTHOR: andrewjkerr <andrewjkerr47@gmail.com>
+		DESCRIPTION: Connects to database.
+		USAGE: Include in php files and use $link!
+	*/
 	// Create connection
 	$link=mysqli_connect("url","user","pass","dbname");
 
