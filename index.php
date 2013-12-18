@@ -3,6 +3,11 @@
 		AUTHOR: andrewjkerr <andrewjkerr47@gmail.com>
 		DESCRIPTION: Homepage!
 		USAGE: Just load it up :)
+		TO-DO:
+			- Link events to event info
+			- Add dates to announcements
+			- Add validation to login <http://jqueryvalidation.org/>
+			- Show user control panel when logged in in #login!
 	*/
 ?>
 <html>
@@ -29,7 +34,7 @@
 	<link rel="stylesheet" type="text/css" href="css/index.css">
 	<style>
 		#container{
-			height: 825px;
+			height: 875px;
 		}
 	</style>
 	
@@ -94,6 +99,7 @@
 				<p>Password: <input type="password" id="password" style="width: 100%" onkeyup="hashpass();"/></p>
 				<p><input type="hidden" id="hashed_pass" name="hashed_pass" /></p>
 				<p><input type="submit" id="my_submit" /></p>
+				<p><em><a href="registration.php#register">Don't have an account? Register!</a></em></p>
 			</form>
 		</div>
 		

@@ -3,6 +3,8 @@
 		AUTHOR: andrewjkerr <andrewjkerr47@gmail.com>
 		DESCRIPTION: Registration
 		USAGE: Registers users/login others!
+		TO-DO:
+			- "Register!" is misaligned
 	*/
 ?>
 <html>
@@ -105,6 +107,31 @@
 							<p><input type="text" name="name" style="width: 300px"/></p>
 							<p>Society lists:</p>
 							<!-- list societies here -->
+							<?php
+								/*for ($i = 1; $i <= 3; $i++){
+									print '<select name="sid' . $i . '" style="width:350px;">' . "\n";;
+									print '	 <option name="dummy" selected="selected"></option>' . "\n";;
+									$societyQuery = "SELECT shortname,name FROM societiesCopy ORDER BY name ASC";
+									$societyResult = mysqli_query($link, $societyQuery) or die("ERROR: " . mysqli_error($link));
+									while ($row = mysqli_fetch_assoc($societyResult)){
+										$socName = $row['name'];
+										$sid = $row['sid'];
+										print "<option value='$sid'>$socName</option>\n";
+									}
+									print '</select>' . "\n";;
+								}*/
+								$json = file_get_contents('http://localhost/~andrewjkerr/eweek/get_societies.php');
+								$obj = json_decode($json);
+								for($i = 1; $i <= 3; $i++){
+									echo '<select name="sid' . $i . '" style="width:350px;">' . "\n";
+									echo '<option name="dummy" selected="selected"></option>' . "\n";
+									foreach($obj as $j){
+										echo "<option value='$j->shortname'>$j->name</option>\n";
+									}
+									echo '</select>' . "\n";
+								}
+							
+							?>
 							<p><input type="hidden" id="hashed_pass" name="hashed_pass" /></p>
 							<p><input type="submit" id="my_submit" /></p>
 						</form>

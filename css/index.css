@@ -11,6 +11,7 @@
 }
 
 #login{
+	height: 220px;
 	float: right;
 	width: 200px;
 	padding: 15px;
@@ -25,7 +26,7 @@
 	margin: 0 15px;
 	padding: 15px;
 	width: 200px;
-	height: 785px;
+	height: 835px;
 	-webkit-border-top-right-radius: 50px 30px; 
 	-webkit-border-bottom-left-radius: 50px 30px;
 	border: 3px solid #777;
