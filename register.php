@@ -25,7 +25,7 @@
 		$checkQuery->execute();
 		$checkQuery->store_result();
 		if($checkQuery->num_rows() == 1){
-			print("You have already registered! If you forgot your password, please contact the Technology Director to reset your password.");
+			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=registration.php#error2">';
 		}
 		else{
 			$query = mysqli_prepare($link, "INSERT INTO users (id, name, email, password, adminlevel, eventadmin, is_society, soc1, soc2, soc3) VALUES (NULL, ?, ?, ?, '0', '0', '0', ?, ?, ?)");

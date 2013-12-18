@@ -31,6 +31,8 @@
 		var registerHeight = 600;
         $(document).ready(function() {
         	var curswitch = window.location.hash;
+        	$("#error1").hide();
+			$("#error2").hide();
         	if(curswitch == "#register"){
 	        	$("#login").hide();
 	        	$("#container").css({"height":registerHeight});
@@ -38,6 +40,13 @@
         	else{
 	        	$("#register").hide();
 	        	$("#container").css({"height":loginHeight});
+	        	if(curswitch == '#error1'){
+		        	$("#error1").slideToggle(500);
+	        	}
+	        	if(curswitch == '#error2'){
+		        	$("#error2").slideToggle(500);
+		        	$("#container").css({"height":360});
+	        	}
         	}
         });
         
@@ -45,6 +54,8 @@
 			$("#login").hide();
 			$("#register").slideToggle(500);
 			$("#container").css({"height":registerHeight});
+			$("#error1").hide();
+			$("#error2").hide();
 		}
 		
 		function hideRegistration(){
@@ -85,6 +96,8 @@
 					<div id="login">
 						<h1>Login!</h1>
 						<p><em><a onclick="hideLogin();" href="#register">Need to register? Click here!</a></em></p>
+						<p id="error1" style="color: #990000"><b>Username or password incorrect. Please try again.</b></p>
+						<p id="error2" style="color: #990000"><b>You have already registered! Please login. If you forgot your password, please contact the Technology Director to reset your password.</b></p>
 						<form id="login-form" method="post" action="login.php">
 							<p>Email:</p>
 							<p><input type="text" name="email" style="width: 300px"/></p>

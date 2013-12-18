@@ -4,6 +4,8 @@
 		DESCRIPTION: Header
 		USAGE: Any modifications to the code go here. CSS for the header can be found in css/main.css
 	*/
+	session_start();
+
 ?>
 <style>
 header{

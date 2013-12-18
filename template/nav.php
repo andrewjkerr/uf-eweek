@@ -10,5 +10,12 @@
 	*/
 ?>
 <nav>
-	<a href="index.php">Home</a> | <a href="registration.php">Login</a> | <a href="registration.php#register">Register</a>
+	<?php
+		if (isset($_SESSION['uid'])){
+	    	echo '<a href="index.php">Home</a> | <a href="logout.php">Logout</a>';
+		}
+		else{
+			echo '<a href="index.php">Home</a> | <a href="registration.php">Login</a> | <a href="registration.php#register">Register</a>';
+		}
+	?>
 </nav>

@@ -36,6 +36,12 @@ nav	a{
 	background-color: #fff;
 }
 
+#content{
+	float: left;
+	padding: 0 15px;
+	width: 465px;
+}
+
 footer{
 	bottom: 0px;
 	padding: 15px 0;
