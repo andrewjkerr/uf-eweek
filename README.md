@@ -5,9 +5,9 @@ A re-creation of the University of Florida's Engineers Week website. This is her
 
 Things Done
 -----------
-* Front page
+* Front page (kind of...............)
 * API returning JSON for events and announcements
-* Login
+* Login (kind of......)
 
 To-do
 -----
