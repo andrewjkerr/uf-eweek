@@ -6,6 +6,7 @@
 		TO-DO:
 			- "Register!" is misaligned
 	*/
+	session_start(); 
 ?>
 <html>
 <head>
@@ -105,21 +106,8 @@
 							<p><input type="password" id="confirm_password" style="width: 300px" onkeyup="hashpass();"/></p>
 							<p>Name:</p>
 							<p><input type="text" name="name" style="width: 300px"/></p>
-							<p>Society lists:</p>
-							<!-- list societies here -->
+							<p>Pick up to three societies to represent:</p>
 							<?php
-								/*for ($i = 1; $i <= 3; $i++){
-									print '<select name="sid' . $i . '" style="width:350px;">' . "\n";;
-									print '	 <option name="dummy" selected="selected"></option>' . "\n";;
-									$societyQuery = "SELECT shortname,name FROM societiesCopy ORDER BY name ASC";
-									$societyResult = mysqli_query($link, $societyQuery) or die("ERROR: " . mysqli_error($link));
-									while ($row = mysqli_fetch_assoc($societyResult)){
-										$socName = $row['name'];
-										$sid = $row['sid'];
-										print "<option value='$sid'>$socName</option>\n";
-									}
-									print '</select>' . "\n";;
-								}*/
 								$json = file_get_contents('http://localhost/~andrewjkerr/eweek/get_societies.php');
 								$obj = json_decode($json);
 								for($i = 1; $i <= 3; $i++){

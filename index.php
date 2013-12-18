@@ -9,6 +9,7 @@
 			- Add validation to login <http://jqueryvalidation.org/>
 			- Show user control panel when logged in in #login!
 	*/
+	session_start();
 ?>
 <html>
 <head>

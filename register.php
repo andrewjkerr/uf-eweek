@@ -9,6 +9,7 @@
 			- Add societies to registration
 	*/
 	include('mysql_connect.php');
+	session_start();
 ?>
 <html>
 <head>
@@ -36,7 +37,21 @@
 			$pSec2 = $_POST['sid2'];
 			$pSec3 = $_POST['sid3'];
 			$query->execute();
-			print("Success!");
+			print("Success! Now logging you in...");
+			$loginQuery = mysqli_prepare($link, "SELECT id, name, adminlevel, eventadmin FROM users WHERE email = ?");
+			$loginQuery->bind_param("s", $pEmail);
+			$pEmail = $_POST['email'];
+			$loginQuery->execute();
+			$loginQuery->store_result();
+			$loginQuery->bind_result($uid, $name, $adminlevel, $eventadmin);
+			$loginQuery->fetch();
+			$_SESSION['uid'] = $uid;
+			$_SESSION['name'] = $name;
+			$_SESSION['adminlevel'] = $adminlevel;
+			$_SESSION['eventadmin'] = $eventadmin;
+			$_SESSION['is_society'] = 0;
+			echo '<p>Login successful!</p>';
+			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=tests/test_login.php">';
 		}
 	?>
 </body>

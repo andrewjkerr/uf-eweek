@@ -5,6 +5,7 @@
 		USAGE: Use as a form action!
 	*/
 	include('mysql_connect.php');
+	session_start();
 ?>
 <html>
 <head>
@@ -21,15 +22,18 @@
 		$checkQuery->store_result();
 		if($checkQuery->num_rows() == 1){
 			print('<p>Access Granted!</p>');
-			$checkQuery->bind_result($uid, $name, $email, $password);
-			$checkQuery->fetch();
+			$loginQuery->bind_result($uid, $name, $adminlevel, $eventadmin);
+			$loginQuery->fetch();
 			$_SESSION['uid'] = $uid;
 			$_SESSION['name'] = $name;
-			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=index.php">';
+			$_SESSION['adminlevel'] = $adminlevel;
+			$_SESSION['eventadmin'] = $eventadmin;
+			$_SESSION['is_society'] = 0;
+			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=tests/test_login.php">';
 		}
 		else{
-			print('Wrong!');
-			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=index.php">';
+			print('Wrong email or password! Please try again!');
+			echo '<META HTTP-EQUIV="Refresh" Content="1; URL=registration.php">';
 		}
 	?>
 </body>
