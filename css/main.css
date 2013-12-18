@@ -5,15 +5,11 @@ body{
 }
 
 header{
+	/* Just the structure of the header. */
 	display: block;
 	margin: 0 auto;
 	padding: 25px 0;
 	width: 1000px;
-	background-color: #990000;
-	background-image: url("http://ufbec.org/eweek/forscience/images/eweek-2013-header-trans.png");
-	background-repeat: no-repeat;
-	background-position: center center;
-	height: 216px;
 }
 
 nav{
