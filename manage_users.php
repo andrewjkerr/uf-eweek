@@ -27,13 +27,6 @@
 		$query->execute();
 		$_SESSION['delete-success'] = true;
 	}
-	if(!empty($_POST['user-add'])){
-		$query = mysqli_prepare($link, 'INSERT INTO announcements (id, text) VALUES (NULL, ?)');
-		$query->bind_param("s", $pText);
-		$pText = $_POST['announcement-add'];
-		$query->execute();
-		$_SESSION['add-success'] = true;
-	}
 ?>
 <html>
 <head>
@@ -43,6 +36,7 @@
 		STYLE
 	-------------->
 	<link rel="stylesheet" type="text/css" href="css/main.css">
+	<link rel="stylesheet" href="scripts/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css" />
 	<style>
 		/* In this case, since the content size is dynamic, we add this to the content div. */
 		#content{
@@ -51,40 +45,70 @@
 			margin-bottom: 31px;
 			border-bottom: 3px solid black;
 		}
-		
-		.edit{
-			display: inline;
-			cursor: hand;
-		}
-		
-		.delete{
-			display: inline;
-			cursor: hand;
-		}
-		.add{
-			display: inline;
-			cursor: hand;
-		}
 	</style>
-	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script src="scripts/SlickGrid/lib/jquery-1.7.min.js"></script>
+	<script src="scripts/SlickGrid/lib/jquery-ui-1.8.16.custom.min.js"></script>
+	<script src="scripts/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
+	<script src="scripts/SlickGrid/plugins/slick.cellrangedecorator.js"></script>
+	<script src="scripts/SlickGrid/plugins/slick.cellrangeselector.js"></script>
+	<script src="scripts/SlickGrid/plugins/slick.cellselectionmodel.js"></script>
+	<script src="scripts/SlickGrid/slick.core.js"></script>
+	<script src="scripts/SlickGrid/slick.formatters.js"></script>
+	<script src="scripts/SlickGrid/slick.editors.js"></script>
+	<script src="scripts/SlickGrid/slick.grid.js"></script>
 	<script>
-		$(document).ready(function() {
-			$(".edit-form").hide();
-			$(".edit").click(function()
-			{
-				$(this).nextAll(".edit-form:first").slideToggle(500);
-			})
-			$(".delete-form").hide();
-			$(".delete").click(function()
-			{
-				$(this).nextAll(".delete-form:first").slideToggle(500);
-			})
-			$(".add-form").hide();
-			$(".add").click(function()
-			{
-				$(this).nextAll(".add-form:first").slideToggle(500);
-			})
-		});
+	  function requiredFieldValidator(value) {
+	    if (value == null || value == undefined || !value.length) {
+	      return {valid: false, msg: "This is a required field"};
+	    } else {
+	      return {valid: true, msg: null};
+	    }
+	  }
+
+	  var grid;
+	  var data = [];
+	  var columns = [
+	    {id: "title", name: "Title", field: "title", width: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
+	    {id: "desc", name: "Description", field: "description", width: 100, editor: Slick.Editors.LongText},
+	    {id: "duration", name: "Duration", field: "duration", editor: Slick.Editors.Text},
+	    {id: "%", name: "% Complete", field: "percentComplete", width: 80, resizable: false, editor: Slick.Editors.PercentComplete},
+	    {id: "start", name: "Start", field: "start", minWidth: 60, editor: Slick.Editors.Date},
+	    {id: "finish", name: "Finish", field: "finish", minWidth: 60, editor: Slick.Editors.Date},
+	    {id: "effort-driven", name: "Effort Driven", width: 80, minWidth: 20, maxWidth: 80, cssClass: "cell-effort-driven", field: "effortDriven", formatter: Slick.Formatters.Checkmark, editor: Slick.Editors.Checkbox}
+	  ];
+	  var options = {
+	    editable: true,
+	    enableAddRow: true,
+	    enableCellNavigation: true,
+	    asyncEditorLoading: false,
+	    autoEdit: false
+	  };
+
+	  $(function () {
+	    for (var i = 0; i < 500; i++) {
+	      var d = (data[i] = {});
+
+	      d["title"] = "Task " + i;
+	      d["description"] = "This is a sample task description.\n  It can be multiline";
+	      d["duration"] = "5 days";
+	      d["percentComplete"] = Math.round(Math.random() * 100);
+	      d["start"] = "01/01/2009";
+	      d["finish"] = "01/05/2009";
+	      d["effortDriven"] = (i % 5 == 0);
+	    }
+
+	    grid = new Slick.Grid("#myGrid", data, columns, options);
+
+	    grid.setSelectionModel(new Slick.CellSelectionModel());
+
+	    grid.onAddNewRow.subscribe(function (e, args) {
+	      var item = args.item;
+	      grid.invalidateRow(data.length);
+	      data.push(item);
+	      grid.updateRowCount();
+	      grid.render();
+	    });
+	  })
 	</script>
 </head>
 <body>
@@ -102,49 +126,51 @@
 	<div id = "container">
 		<div id="content">
 			<h1>User Manager</h1>
+			<div id="myGrid"></div>
 			<?php
-				echo '<p>Hello, ' . $_SESSION['name'] . ' and welcome to the user management system! (v0.1)</p>';
+				/*echo '<p>Hello, ' . $_SESSION['name'] . ' and welcome to the user management system! (v0.1)</p>';
 				echo '<hr />';
-				echo '<div class="add"><h2>Add user!</h2></div>';
-				echo '<div class="add-form">
-					<form method="post" action="'. $_SERVER['$PHP_SELF'] . '">' .
-					
-					$json = file_get_contents('http://localhost/~andrewjkerr/eweek/get_societies.php');
-					$obj = json_decode($json);
-					for($i = 1; $i <= 3; $i++){
-						echo '<select name="sid' . $i . '" style="width:350px;">' . "\n";
-						echo '<option name="dummy" selected="selected"></option>' . "\n";
-						foreach($obj as $j){
-							echo "<option value='$j->shortname'>$j->name</option>\n";
-						}
-						echo '</select>' . "\n";
-					}
-						
-					. '<p><input type="submit" /></p>
-					</form>
-				</div>';
-				echo '<hr />';
-				$url = "http://localhost/~andrewjkerr/eweek/get_announcements.php";
-				$json = file_get_contents($url);
+				$result = mysqli_query($link, "SELECT id, name, email, adminlevel, eventadmin, soc1, soc2, soc3 FROM users"); 
+				$json = mysqli_fetch_all($result, MYSQLI_ASSOC);
+				$json = json_encode($json);
 				$obj = json_decode($json);
+				echo '<table>
+					<tr>
+						<td>ID</td>
+						<td>Name</td>
+						<td>Email</td>
+						<td>Admin</td>
+						<td>Society 1</td>
+						<td>Society 2</td>
+						<td>Society 3</td>
+						<td>Edit</td>
+						<td>Delete</td>
+					</tr>';
 				foreach($obj as $i){
-					echo "<p>" . $i->text . "</p>";
-					echo '<p><div class="edit">[Edit]</div> | <div class="delete">[Delete]</div></p>';
-					echo '<div class="edit-form">
+					echo "<tr><td>" . $i->id . "</td>";
+					echo '<td>' . $i->name . '</td>';
+					echo '<td>' . $i->email . '</td>';
+					echo '<td>' . $i->adminlevel . '</td>';
+					echo '<td>' . $i->eventadmin . '</td>';
+					echo '<td>' . $i->soc1 . '</td>';
+					echo '<td>' . $i->soc2 . '</td>';
+					echo '<td>' . $i->soc3 . '</td>';
+					echo '<td><div class="edit">[Edit]</div>
+						<td><div class="delete">[Delete]</div></td></tr>';
+					/*echo '<div class="edit-form">
 							<form method="post" action="'. $_SERVER['$PHP_SELF'] . '">
 								<textarea cols="75" rows="5" name="announcement-edit">' . $i->text . '</textarea>
 								<input type="hidden" name="id-edit" value="' . $i->id . '" /> 
 								<p><input type="submit" /></p>
 							</form>
 						</div>';
-					echo '<div class="delete-form">
+					echo '<tr class="delete-form"><td colspan=7>
 						<form method="post" action="'. $_SERVER['$PHP_SELF'] . '">
 							<input type="hidden" name="id-delete" value="' . $i->id . '" /> 
 							<p><input type="submit" value="Confirm Deletion" /></p>
-						</form>
-					</div>';
-					echo "<hr />";
+						</form></td></tr>';
 				}
+				echo '</table>';*/
 				
 			?>
 		</div>
