@@ -49,7 +49,7 @@
 		#content{
 			background-color: #fff;
 			width: 97%;
-			margin-bottom: 37px;
+			margin-bottom: 31px;
 			border-bottom: 3px solid black;
 		}
 		
@@ -113,6 +113,7 @@
 						<p><input type="submit" /></p>
 					</form>
 				</div>';
+				echo '<hr />';
 				$url = "http://localhost/~andrewjkerr/eweek/get_announcements.php";
 				$json = file_get_contents($url);
 				$obj = json_decode($json);

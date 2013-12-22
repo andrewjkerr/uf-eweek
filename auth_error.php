@@ -22,7 +22,7 @@
 		}
 		
 		#content{
-			width: 100%;
+			width: 97%;
 		}
 	</style>
 	<script type="text/javascript">

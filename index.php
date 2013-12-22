@@ -65,13 +65,16 @@
 					$obj = json_decode($json);
 					/*
 						Why is this here? Well, if the number of announcements goes off the page, reduce it!
-						$numAnnouncements;
+						$numAnnouncements = 5;
 						for($j = 0; $j < $numAnnouncements; $j++){
 							echo "<p>" . $obj[$j]->id . ": " . $obj[$j]->text . "</p>";
 						}
 					*/
 					foreach($obj as $i){
-						echo "<p>" . $i->id . ": " . $i->text . "</p>";
+						echo '<div class="announcement">';
+						echo "<p>" . $i->text . "</p>";
+						echo '<hr style="width: 420px; margin: 0 auto;" />';
+						echo '</div>';
 					}
 				?>
 			</div>
@@ -117,7 +120,7 @@
 						case 1:
 							echo '<li>You are an event admin</li>';
 							if($_SESSION['eventadmin'] != '0'){
-								echo '<li><a href="manageEvent.php?' . $_SESSION['eventadmin'] . '">Manage ' . $_SESSION['eventadmin'] . '</a></li>';
+								echo '<li><a href="manage_event.php?' . $_SESSION['eventadmin'] . '">Manage ' . $_SESSION['eventadmin'] . '</a></li>';
 								echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 								echo '<li><a href="logout.php">Logout</a></li>';
 							}
@@ -139,7 +142,7 @@
 							echo '<li>You are director of eweek</li>';
 							echo '<li><a href="announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
-							echo '<li><a href="manageEvent.php?id=all">Manage events</a></li>';
+							echo '<li><a href="manage_event.php">Manage events</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
 							break;
@@ -147,7 +150,7 @@
 							echo '<li>You are super admin!</li>';
 							echo '<li><a href="announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
-							echo '<li><a href="manageEvent.php?id=all">Manage events</a></li>';
+							echo '<li><a href="manage_event.php">Manage events</a></li>';
 							echo '<li><a href="manageUsers.php">Manage users</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
