@@ -120,38 +120,38 @@
 						case 1:
 							echo '<li>You are an event admin</li>';
 							if($_SESSION['eventadmin'] != '0'){
-								echo '<li><a href="manage_event.php?' . $_SESSION['eventadmin'] . '">Manage ' . $_SESSION['eventadmin'] . '</a></li>';
+								echo '<li><a href="manage_events.php?' . $_SESSION['eventadmin'] . '">Manage ' . $_SESSION['eventadmin'] . '</a></li>';
 								echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 								echo '<li><a href="logout.php">Logout</a></li>';
 							}
 							break;
 						case 2:
 							echo '<li>You are advertising director</li>';
-							echo '<li><a href="announcements.php">Add announcement</a></li>';
+							echo '<li><a href="manage_announcements.php">Add announcement</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
 							break;
 						case 3:
 							echo '<li>You are attendant</li>';
-							echo '<li><a href="announcements.php">Add announcement</a></li>';
+							echo '<li><a href="manage_announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
 							break;
 						case 4:
 							echo '<li>You are director of eweek</li>';
-							echo '<li><a href="announcements.php">Add announcement</a></li>';
+							echo '<li><a href="manage_announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
-							echo '<li><a href="manage_event.php">Manage events</a></li>';
+							echo '<li><a href="manage_events.php">Manage events</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
 							break;
 						case 5:
 							echo '<li>You are super admin!</li>';
-							echo '<li><a href="announcements.php">Add announcement</a></li>';
+							echo '<li><a href="manage_announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
-							echo '<li><a href="manage_event.php">Manage events</a></li>';
-							echo '<li><a href="manageUsers.php">Manage users</a></li>';
+							echo '<li><a href="manage_events.php">Manage events</a></li>';
+							echo '<li><a href="manage_users.php">Manage users</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
 							break;
