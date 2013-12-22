@@ -18,6 +18,7 @@ To-do
 * Add registration page (for societies)
 * User management
 * Database additions
+* Documentation
 
 Planned Additions and Improvements
 ----------------------------------
@@ -25,3 +26,7 @@ Planned Additions and Improvements
 * Better UX design
 * Better documentation
 * Moar APIs returning JSON to help separate database calls from design
+
+Possible Additions
+------------------
+* Bootstrap to make design easy
