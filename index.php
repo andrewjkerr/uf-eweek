@@ -124,20 +124,20 @@
 							break;
 						case 2:
 							echo '<li>You are advertising director</li>';
-							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="announcements.php">Add announcement</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
 							break;
 						case 3:
 							echo '<li>You are attendant</li>';
-							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
 							echo '<li><a href="logout.php">Logout</a></li>';
 							break;
 						case 4:
 							echo '<li>You are director of eweek</li>';
-							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
 							echo '<li><a href="manageEvent.php?id=all">Manage events</a></li>';
 							echo '<li><a href="events.php">View and RSVP for events!</a></li>';
@@ -145,7 +145,7 @@
 							break;
 						case 5:
 							echo '<li>You are super admin!</li>';
-							echo '<li><a href="addAnnouncement.php">Add announcement</a></li>';
+							echo '<li><a href="announcements.php">Add announcement</a></li>';
 							echo '<li><a href="mulan/index.php">Access Mulan</a></li>';
 							echo '<li><a href="manageEvent.php?id=all">Manage events</a></li>';
 							echo '<li><a href="manageUsers.php">Manage users</a></li>';
