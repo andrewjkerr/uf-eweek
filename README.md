@@ -5,15 +5,19 @@ A re-creation of the University of Florida's Engineers Week website. This is her
 
 Things Done
 -----------
-* Front page (kind of...............)
-* API returning JSON for events and announcements
-* Login (kind of......)
+* Homepage
+* API returning JSON for events, announcements, societies
+* Login
+* Registration (for students)
+* Event management
+* Announcement management
 
 To-do
 -----
 * Add attendance system (Mulan!)
-* Add registration pages (for students and societies)
-* ... pretty much everything else.
+* Add registration page (for societies)
+* User management
+* Database additions
 
 Planned Additions and Improvements
 ----------------------------------
