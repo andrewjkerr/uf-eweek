@@ -116,6 +116,7 @@
 	-------------->
 		
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
+	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
 	<script>
 		$(document).ready(function() {
 			$(".edit-row").hide();
@@ -128,10 +129,14 @@
 			{
 				$(this).closest(".row").nextAll(".delete-row:first").slideToggle(500);
 			})
+			$(".password-edit").keyup(function(){
+				//$(this).nextAll(".hashed-edit:first").val()
+				var test = $(this).closest("form").nextAll(".hashed-edit:first").val();
+				var test1 = $(this).val();
+				alert(test);
+			})
 		});
 	</script>
-	
-	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
 	<script>
 	function hashpass(){
 		/*var password = document.getElementById('password-edit').value;
@@ -200,7 +205,7 @@
 									<input type="hidden" name="id-edit" value="' . $i->id . '" />
 									<p>Name: <input type="text" name="name-edit" value="' . $i->name . '" /></p>
 									<p>Email: <input type="text" name="email-edit" value="' . $i->email . '" /></p>
-									<p>Password: <input type="text" class="password-edit" onkeyup="hashpass();"/></p>
+									<p>Password: <input type="text" class="password-edit" /></p>
 									<p>Admin Level: <input type="text" name="admin-edit" value="' . $i->adminlevel . '" /></p>
 									<p>Event Admin: <input type="text" name="event-edit" value="' . $i->eventadmin . '" /></p>
 									<p>Society 1: <input type="text" name="soc1-edit" value="' . $i->soc1 . '" /> | Society 2: <input type="text" name="soc2-edit" value="' . $i->soc2 . '" /> | Society 3: <input type="text" name="soc3-edit" value="' . $i->soc3 . '" /></p>
