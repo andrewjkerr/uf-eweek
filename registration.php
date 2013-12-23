@@ -24,6 +24,12 @@
 		var hashed = CryptoJS.SHA3(password);
 		document.getElementById('hashed_pass').value = hashed;
 	}
+	
+	function hashpass2(){
+		var password = document.getElementById('password-reg').value;
+		var hashed = CryptoJS.SHA3(password);
+		document.getElementById('hashed_pass-reg').value = hashed;
+	}
 	</script>
 	
 	<script>
@@ -114,9 +120,9 @@
 							<p>Email:</p>
 							<p><input type="text" name="email" style="width: 300px"/></p>
 							<p>Password:</p>
-							<p><input type="password" id="password" style="width: 300px" /></p>
+							<p><input type="password" id="password-reg" style="width: 300px" /></p>
 							<p>Confirm Password:</p>
-							<p><input type="password" id="confirm_password" style="width: 300px" onkeyup="hashpass();"/></p>
+							<p><input type="password" id="confirm_password" style="width: 300px" onkeyup="hashpass2();"/></p>
 							<p>Name:</p>
 							<p><input type="text" name="name" style="width: 300px"/></p>
 							<p>Pick up to three societies to represent:</p>
@@ -133,7 +139,7 @@
 								}
 							
 							?>
-							<p><input type="text" id="hashed_pass" name="hashed_pass" /></p>
+							<p><input type="text" id="hashed_pass-reg" name="hashed_pass" /></p>
 							<p><input type="submit" id="my_submit" /></p>
 						</form>
 					</div>
