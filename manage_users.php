@@ -134,7 +134,7 @@
 	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
 	<script>
 	function hashpass(){
-		var password = document.getElementById('password-edit').value;
+		/*var password = document.getElementById('password-edit').value;
 		if(password != ""){
 			document.getElementById('password-changed').value = "true";
 		}
@@ -142,7 +142,7 @@
 			document.getElementById('password-changed').value = "false";
 		}
 		var hashed = CryptoJS.SHA3(password);
-		document.getElementById('hashed-edit').value = hashed;
+		document.getElementById('hashed-edit').value = hashed;*/
 	}
 	</script>
 	
@@ -200,12 +200,12 @@
 									<input type="hidden" name="id-edit" value="' . $i->id . '" />
 									<p>Name: <input type="text" name="name-edit" value="' . $i->name . '" /></p>
 									<p>Email: <input type="text" name="email-edit" value="' . $i->email . '" /></p>
-									<p>Password: <input type="text" id="password-edit" onkeyup="hashpass();"/></p>
+									<p>Password: <input type="text" class="password-edit" onkeyup="hashpass();"/></p>
 									<p>Admin Level: <input type="text" name="admin-edit" value="' . $i->adminlevel . '" /></p>
 									<p>Event Admin: <input type="text" name="event-edit" value="' . $i->eventadmin . '" /></p>
 									<p>Society 1: <input type="text" name="soc1-edit" value="' . $i->soc1 . '" /> | Society 2: <input type="text" name="soc2-edit" value="' . $i->soc2 . '" /> | Society 3: <input type="text" name="soc3-edit" value="' . $i->soc3 . '" /></p>
-									<p><input type="text" name="hashed-edit" id="hashed-edit" /></p>
-									<p><input type="text" name="password-changed" id="password-changed" value="false" /></p>
+									<p><input type="text" name="hashed-edit" class="hashed-edit" /></p>
+									<p><input type="text" name="password-changed" class="password-changed" value="false" /></p>
 									<p><input type="submit" value="Confirm Edit" /></p>
 								</form>';
 						echo '</div>';
