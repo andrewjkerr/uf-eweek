@@ -1,0 +1,64 @@
+Database: eweek
+
+Table: announcements
+- id
+- text
+* date (todo)
+
+Table: announcement_history (todo)
+* id
+* announcement-id (id from announcements)
+* text
+* date created
+* date modified
+* user modified
+
+Table: events
+- id
+- name
+- shortname (basically an identifier of sorts)
+- description
+- date (string as of now, date later on)
+- location (string)
+* logo url
+* event contact
+* Facebook link
+
+Table: societies
+- id
+- shortname (basically an identifier of sorts)
+- name
+* is_eweek
+* is_efair
+* is_user
+* num_members
+
+Table: users
+- id
+- name
+- email
+- password
+- adminlevel (0-5; see index for descriptions)
+- eventadmin (with event shortcode)
+- is_society
+- soc1
+- soc2
+- soc3
+
+Table: attendance (todo)
+* id (user's id taken from user)
+* event1
+* event2
+* event3
+	.
+	.
+	.
+	
+Table: rsvp (todo)
+* id(user's id taken from user)
+* event1
+* event2
+* event3
+	.
+	.
+	.
