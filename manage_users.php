@@ -135,12 +135,12 @@
 	<script>
 	function hashpass(){
 		var password = document.getElementById('password-edit').value;
-		/*if(password != ""){
+		if(password != ""){
 			document.getElementById('password-changed').value = "true";
 		}
 		else{
 			document.getElementById('password-changed').value = "false";
-		}*/
+		}
 		var hashed = CryptoJS.SHA3(password);
 		document.getElementById('hashed-edit').value = hashed;
 	}
