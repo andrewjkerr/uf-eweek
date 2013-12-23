@@ -13,15 +13,29 @@
 		exit();
 	}
 	if(!empty($_POST['id-edit'])){
-		$query = mysqli_prepare($link, 'UPDATE announcements SET text=? WHERE id=?');
-		$query->bind_param("ss", $pEdit, $pID);
+		if($_POST['password-changed'] == "true"){
+			$query = mysqli_prepare($link, 'UPDATE users SET name=?, email=?, password=?, adminlevel=?, eventadmin=?, soc1=?, soc2=?, soc3=? WHERE id=?') or die();
+			$query->bind_param("sssssssss", $pName, $pEmail, $pHash, $pAdmin, $pEvent, $pSoc1, $pSoc2, $pSoc3, $pID);
+			$pHash = $_POST['hashed-edit'];
+			echo $_POST['id-edit'];
+		}
+		else{
+			$query = mysqli_prepare($link, 'UPDATE users SET `name`=?, `email`=?, `adminlevel`=?, `eventadmin`=?, `soc1`=?, `soc2`=?, `soc3`=? WHERE `id`=?') or die();
+			$query->bind_param("ssssssss", $pName, $pEmail, $pAdmin, $pEvent, $pSoc1, $pSoc2, $pSoc3, $pID);
+		}
 		$pID = $_POST['id-edit'];
-		$pEdit = $_POST['announcement-edit'];
+		$pName = $_POST['name-edit'];
+		$pEmail = $_POST['email-edit'];
+		$pAdmin = $_POST['admin-edit'];
+		$pEvent = $_POST['event-edit'];
+		$pSoc1 = $_POST['soc1-edit'];
+		$pSoc2 = $_POST['soc2-edit'];
+		$pSoc3 = $_POST['soc3-edit'];
 		$query->execute();
 		$_SESSION['edit-success'] = true;
 	}
 	if(!empty($_POST['id-delete'])){
-		$query = mysqli_prepare($link, 'DELETE FROM announcements WHERE id=?');
+		$query = mysqli_prepare($link, 'DELETE FROM users WHERE id=?');
 		$query->bind_param("s", $pID);
 		$pID = $_POST['id-delete'];
 		$query->execute();
@@ -35,81 +49,103 @@
 	<!-------------
 		STYLE
 	-------------->
+		
 	<link rel="stylesheet" type="text/css" href="css/main.css">
-	<link rel="stylesheet" href="scripts/SlickGrid/css/smoothness/jquery-ui-1.8.16.custom.css" type="text/css" />
 	<style>
-		/* In this case, since the content size is dynamic, we add this to the content div. */
+	/* In this case, since the content size is dynamic, we add this to the content div. */
 		#content{
 			background-color: #fff;
 			width: 97%;
-			margin-bottom: 31px;
+			margin-bottom: 31px;			
 			border-bottom: 3px solid black;
 		}
+		.floatedCell{
+		    float:left;
+		    width: 50px%;
+		    height: 30px;
+			padding-left: 10px;
+		}
+		.floatedCellID{
+		    float:left;
+		    border-right: 1px solid black;
+		    width: 30px;
+		    height: 30px;
+		}
+		.floatedCellName{
+		    float:left;
+		    border-right: 1px solid black;
+		    width: 190px;
+		    height: 30px;
+			padding: 0 10px;
+		}
+		.floatedCellEmail{
+		    float:left;
+		    border-right: 1px solid black;
+		    width: 280px;
+		    height: 30px;
+			padding: 0 10px;
+		}
+		.floatedCellAdmin{
+		    float:left;
+		    border-right: 1px solid black;
+		    width: 50px;
+		    height: 30px;
+			text-align: center;
+		}
+		.floatedCellEvent{
+		    float:left;
+		    border-right: 1px solid black;
+		    width: 50px;
+		    height: 30px;
+			text-align: center;
+		}
+		.floatedCellSoc{
+		    float:left;
+		    border-right: 1px solid black;
+		    width: 70px;
+		    height: 30px;
+			text-align: center;
+		}
+		.clear{
+		    clear: both;
+		}
 	</style>
-	<script src="scripts/SlickGrid/lib/jquery-1.7.min.js"></script>
-	<script src="scripts/SlickGrid/lib/jquery-ui-1.8.16.custom.min.js"></script>
-	<script src="scripts/SlickGrid/lib/jquery.event.drag-2.2.js"></script>
-	<script src="scripts/SlickGrid/plugins/slick.cellrangedecorator.js"></script>
-	<script src="scripts/SlickGrid/plugins/slick.cellrangeselector.js"></script>
-	<script src="scripts/SlickGrid/plugins/slick.cellselectionmodel.js"></script>
-	<script src="scripts/SlickGrid/slick.core.js"></script>
-	<script src="scripts/SlickGrid/slick.formatters.js"></script>
-	<script src="scripts/SlickGrid/slick.editors.js"></script>
-	<script src="scripts/SlickGrid/slick.grid.js"></script>
+	
+	<!-------------
+		SCRIPTS
+	-------------->
+		
+	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.3.2/jquery.min.js"></script>
 	<script>
-	  function requiredFieldValidator(value) {
-	    if (value == null || value == undefined || !value.length) {
-	      return {valid: false, msg: "This is a required field"};
-	    } else {
-	      return {valid: true, msg: null};
-	    }
-	  }
-
-	  var grid;
-	  var data = [];
-	  var columns = [
-	    {id: "title", name: "Title", field: "title", width: 120, cssClass: "cell-title", editor: Slick.Editors.Text, validator: requiredFieldValidator},
-	    {id: "desc", name: "Description", field: "description", width: 100, editor: Slick.Editors.LongText},
-	    {id: "duration", name: "Duration", field: "duration", editor: Slick.Editors.Text},
-	    {id: "%", name: "% Complete", field: "percentComplete", width: 80, resizable: false, editor: Slick.Editors.PercentComplete},
-	    {id: "start", name: "Start", field: "start", minWidth: 60, editor: Slick.Editors.Date},
-	    {id: "finish", name: "Finish", field: "finish", minWidth: 60, editor: Slick.Editors.Date},
-	    {id: "effort-driven", name: "Effort Driven", width: 80, minWidth: 20, maxWidth: 80, cssClass: "cell-effort-driven", field: "effortDriven", formatter: Slick.Formatters.Checkmark, editor: Slick.Editors.Checkbox}
-	  ];
-	  var options = {
-	    editable: true,
-	    enableAddRow: true,
-	    enableCellNavigation: true,
-	    asyncEditorLoading: false,
-	    autoEdit: false
-	  };
-
-	  $(function () {
-	    for (var i = 0; i < 500; i++) {
-	      var d = (data[i] = {});
-
-	      d["title"] = "Task " + i;
-	      d["description"] = "This is a sample task description.\n  It can be multiline";
-	      d["duration"] = "5 days";
-	      d["percentComplete"] = Math.round(Math.random() * 100);
-	      d["start"] = "01/01/2009";
-	      d["finish"] = "01/05/2009";
-	      d["effortDriven"] = (i % 5 == 0);
-	    }
-
-	    grid = new Slick.Grid("#myGrid", data, columns, options);
-
-	    grid.setSelectionModel(new Slick.CellSelectionModel());
-
-	    grid.onAddNewRow.subscribe(function (e, args) {
-	      var item = args.item;
-	      grid.invalidateRow(data.length);
-	      data.push(item);
-	      grid.updateRowCount();
-	      grid.render();
-	    });
-	  })
+		$(document).ready(function() {
+			$(".edit-row").hide();
+			$(".edit").click(function()
+			{
+				$(this).closest(".row").nextAll(".edit-row:first").slideToggle(500);
+			})
+			$(".delete-row").hide();
+			$(".delete").click(function()
+			{
+				$(this).closest(".row").nextAll(".delete-row:first").slideToggle(500);
+			})
+		});
 	</script>
+	
+	<script src="http://crypto-js.googlecode.com/svn/tags/3.1.2/build/rollups/sha3.js"></script>
+	<script>
+	function hashpass(){
+		var password = document.getElementById('password-edit').value;
+		/*if(password != ""){
+			document.getElementById('password-changed').value = "true";
+		}
+		else{
+			document.getElementById('password-changed').value = "false";
+		}*/
+		var hashed = CryptoJS.SHA3(password);
+		document.getElementById('hashed-edit').value = hashed;
+	}
+	</script>
+	
 </head>
 <body>
 	<!-------------
@@ -126,51 +162,61 @@
 	<div id = "container">
 		<div id="content">
 			<h1>User Manager</h1>
-			<div id="myGrid"></div>
 			<?php
-				/*echo '<p>Hello, ' . $_SESSION['name'] . ' and welcome to the user management system! (v0.1)</p>';
+				echo '<p>Hello, ' . $_SESSION['name'] . ' and welcome to the user management system! (v0.1)</p>';
 				echo '<hr />';
 				$result = mysqli_query($link, "SELECT id, name, email, adminlevel, eventadmin, soc1, soc2, soc3 FROM users"); 
 				$json = mysqli_fetch_all($result, MYSQLI_ASSOC);
 				$json = json_encode($json);
 				$obj = json_decode($json);
-				echo '<table>
-					<tr>
-						<td>ID</td>
-						<td>Name</td>
-						<td>Email</td>
-						<td>Admin</td>
-						<td>Society 1</td>
-						<td>Society 2</td>
-						<td>Society 3</td>
-						<td>Edit</td>
-						<td>Delete</td>
-					</tr>';
-				foreach($obj as $i){
-					echo "<tr><td>" . $i->id . "</td>";
-					echo '<td>' . $i->name . '</td>';
-					echo '<td>' . $i->email . '</td>';
-					echo '<td>' . $i->adminlevel . '</td>';
-					echo '<td>' . $i->eventadmin . '</td>';
-					echo '<td>' . $i->soc1 . '</td>';
-					echo '<td>' . $i->soc2 . '</td>';
-					echo '<td>' . $i->soc3 . '</td>';
-					echo '<td><div class="edit">[Edit]</div>
-						<td><div class="delete">[Delete]</div></td></tr>';
-					/*echo '<div class="edit-form">
-							<form method="post" action="'. $_SERVER['$PHP_SELF'] . '">
-								<textarea cols="75" rows="5" name="announcement-edit">' . $i->text . '</textarea>
-								<input type="hidden" name="id-edit" value="' . $i->id . '" /> 
-								<p><input type="submit" /></p>
-							</form>
-						</div>';
-					echo '<tr class="delete-form"><td colspan=7>
-						<form method="post" action="'. $_SERVER['$PHP_SELF'] . '">
-							<input type="hidden" name="id-delete" value="' . $i->id . '" /> 
-							<p><input type="submit" value="Confirm Deletion" /></p>
-						</form></td></tr>';
-				}
-				echo '</table>';*/
+				echo '<div class="table">';
+					echo '<div class="row">';
+						echo '<div class="floatedCellID">ID</div>';
+						echo '<div class="floatedCellName">Name</div>';
+						echo '<div class="floatedCellEmail">Email</div>';
+						echo '<div class="floatedCellAdmin">Admin</div>';
+						echo '<div class="floatedCellEvent">Event</div>';
+						echo '<div class="floatedCellSoc">Society 1</div>';
+						echo '<div class="floatedCellSoc">Society 2</div>';
+						echo '<div class="floatedCellSoc">Society 3</div>';
+						echo '<div class="clear"></div>';
+					echo '</div>';
+					foreach($obj as $i){
+						echo '<div class="row">';
+							echo '<div class="floatedCellID">' . $i->id . '</div>';
+							echo '<div class="floatedCellName">' . $i->name . '</div>';
+							echo '<div class="floatedCellEmail">' . $i->email . '</div>';
+							echo '<div class="floatedCellAdmin">' . $i->adminlevel . '</div>';
+							echo '<div class="floatedCellEvent">' . $i->eventadmin . '</div>';
+							echo '<div class="floatedCellSoc">' . $i->soc1 . '</div>';
+							echo '<div class="floatedCellSoc">' . $i->soc2 . '</div>';
+							echo '<div class="floatedCellSoc">' . $i->soc3 . '</div>';
+							echo '<div class="floatedCell"><div class="edit">[Edit]</div></div>';
+							echo '<div class="floatedCell"><div class="delete">[Delete]</div></div>';
+							echo '<div class="clear"></div>';
+						echo '</div>';
+						echo '<div class="edit-row">';
+							echo '<form method="post" action="' . $_SERVER['$PHP_SELF'] . '">
+									<input type="hidden" name="id-edit" value="' . $i->id . '" />
+									<p>Name: <input type="text" name="name-edit" value="' . $i->name . '" /></p>
+									<p>Email: <input type="text" name="email-edit" value="' . $i->email . '" /></p>
+									<p>Password: <input type="text" id="password-edit" onkeyup="hashpass();"/></p>
+									<p>Admin Level: <input type="text" name="admin-edit" value="' . $i->adminlevel . '" /></p>
+									<p>Event Admin: <input type="text" name="event-edit" value="' . $i->eventadmin . '" /></p>
+									<p>Society 1: <input type="text" name="soc1-edit" value="' . $i->soc1 . '" /> | Society 2: <input type="text" name="soc2-edit" value="' . $i->soc2 . '" /> | Society 3: <input type="text" name="soc3-edit" value="' . $i->soc3 . '" /></p>
+									<p><input type="text" name="hashed-edit" id="hashed-edit" /></p>
+									<p><input type="text" name="password-changed" id="password-changed" value="false" /></p>
+									<p><input type="submit" value="Confirm Edit" /></p>
+								</form>';
+						echo '</div>';
+						echo '<div class="delete-row">
+								<form method="post" action="'. $_SERVER['$PHP_SELF'] . '">
+									<input type="hidden" name="id-delete" value="' . $i->id . '" /> 
+									<p><input type="submit" value="Confirm Deletion" /></p>
+								</form>
+							</div>';
+					}
+				echo '</div>';
 				
 			?>
 		</div>
@@ -182,17 +228,13 @@
 	<?php
 		include("template/footer.php");
 		if($_SESSION['edit-success'] && !empty($_POST['id-edit'])){
-			echo '<script>alert("Your announcement has been updated!");</script>';
+			echo '<script>alert("The user has been updated!");</script>';
 		}
 		unset($_SESSION['edit-success']);
 		if($_SESSION['delete-success'] && !empty($_POST['id-delete'])){
-			echo '<script>alert("That announcement has been deleted!");</script>';
+			echo '<script>alert("The user has been deleted!");</script>';
 		}
 		unset($_SESSION['delete-success']);
-		if($_SESSION['add-success'] && !empty($_POST['announcement-add'])){
-			echo '<script>alert("Your announcement has been added!");</script>';
-		}
-		unset($_SESSION['add-success']);
 		
 	?>
 

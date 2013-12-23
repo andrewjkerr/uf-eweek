@@ -133,7 +133,7 @@
 								}
 							
 							?>
-							<p><input type="hidden" id="hashed_pass" name="hashed_pass" /></p>
+							<p><input type="text" id="hashed_pass" name="hashed_pass" /></p>
 							<p><input type="submit" id="my_submit" /></p>
 						</form>
 					</div>
