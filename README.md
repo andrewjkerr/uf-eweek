@@ -11,12 +11,12 @@ Things Done
 * Registration (for students)
 * Event management
 * Announcement management
+* User management
 
 To-do
 -----
 * Add attendance system (Mulan!)
 * Add registration page (for societies)
-* User management
 * Database additions
 * Documentation
 
