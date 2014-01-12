@@ -3,6 +3,8 @@ Engineers Week at the University of Florida
 
 A re-creation of the University of Florida's Engineers Week website. This is here to share my progress with others.
 
+**Please note that I am most likely not going to complete this in PHP. I am in the process of porting this project over to Rails.**
+
 Things Done
 -----------
 * Homepage
